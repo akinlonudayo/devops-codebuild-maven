@@ -3,7 +3,7 @@ name: Deploy Maven App to EC2
 on:
   push:
     branches:
-      - main
+      - main  # or your deployment branch
 
 jobs:
   deploy:
@@ -13,10 +13,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'  # Change to your version
+
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
       - name: Prepare artifact
         run: |
           mkdir -p build
-          cp path/to/your/already-built/app.jar build/app.jar
+          cp target/*.jar build/app.jar
           ls -l build
 
       - name: Copy artifact to EC2
