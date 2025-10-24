@@ -13,6 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Prepare artifact
+        run: |
+          mkdir -p build
+          cp path/to/your/already-built/app.jar build/app.jar
+          ls -l build
+
       - name: Copy artifact to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
