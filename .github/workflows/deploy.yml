@@ -20,7 +20,9 @@ jobs:
           java-version: '17'  # Change to your version
 
       - name: Build with Maven
-        run: mvn clean package -DskipTests
+        run: |
+          cd my-webapp
+          mvn clean package -DskipTests
 
       - name: Prepare artifact
         run: |
